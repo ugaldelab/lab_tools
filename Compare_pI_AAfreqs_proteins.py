@@ -13,9 +13,18 @@ Usage:
 from collections import defaultdict
 import os
 import argparse
-import numpy as np
-from Bio import SeqIO
-from pyteomics import electrochem, auxiliary
+import sys
+
+try:
+    import numpy as np
+    from Bio import SeqIO
+    from pyteomics import electrochem, auxiliary
+
+except ImportError, e:
+    print sys.stderr, " does not exist"
+    print sys.stderr, " Exception: %s" % str(e)
+    sys.exit(1)
+
 
 program_description = "Script that takes a set of different protein fasta files (one per genome, or one per " \
                       "metagenome, for example), and calculates isoelectric point and amino acid frequencies"

@@ -1,5 +1,6 @@
 #Lab tools
 
-Repository for scripts that are usually just one file, and do a few tasks. Basically, things that
-do not deserve their own repository :)
+Repository for single (or short) scripts that do some of the commonly used tasks in the lab.
 
+TODO
+- Documentation
