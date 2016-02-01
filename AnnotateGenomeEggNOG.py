@@ -159,7 +159,7 @@ def main():
     # Run the hmmsearch
     tab_out = args.output_prefix + "_hmmsearch.txt"
     run_out = args.output_prefix + 'run_out.txt'
-    run_hmmsearch(args.input_fasta, args.eggnog_db, args.cpus, tab_out, run_out)
+    #run_hmmsearch(args.input_fasta, args.eggnog_db, args.cpus, tab_out, run_out)
 
     # Parse results
     hmm_results = parse_hmm_results(tab_out)
@@ -181,7 +181,7 @@ def main():
         # get the description for the one letter code
         category_descriptions = get_func_cat_description(func_categories)
 
-        output_line = [entry, eggnog_id, evalue, product_description,
+        output_line = [entry, eggnog_id, str(evalue), product_description,
                        func_categories, ",".join(category_descriptions)]
 
         output_annotation.write("\t".join(output_line) + "\n")
