@@ -76,8 +76,8 @@ for entry in fasta_to_process:
             print count
 
         # Stop at 2,000 for testing purposes:
-        if count == 200:
-            break
+        #if count == 2000:
+        #    break
 
         try:
             pI_count.append(electrochem.pI(aa_sequence))
