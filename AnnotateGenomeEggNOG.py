@@ -93,7 +93,7 @@ def run_hmmsearch(input_fasta, db, num_cpus, tab_output, run_output):
     import sys
 
     try:
-        subprocess.call(["hmmsearch", "--cpu", str(num_cpus), "--tblout", tab_output, "-o", run_output,
+        subprocess.call(["hmmsearch", "-E", "0.001", "--cpu", str(num_cpus), "--tblout", tab_output, "-o", run_output,
                         db, input_fasta])
     except OSError as e:
         if e.errno == os.errno.ENOENT:
@@ -110,22 +110,29 @@ def parse_hmm_results(input_file):
     """
     from collections import defaultdict
 
-    hmm_result = defaultdict(list)
+    raw_hmm_result = defaultdict(list)
 
     for line in open(input_file, 'r'):
         line = line.rstrip()
         if line.startswith("#"):
             continue
 
-        target_name = line.split()[0]
-        query_name = line.split()[2]
+        query_name = line.split()[0]
+        target_name = line.split()[2]
         evalue = line.split()[4]
 
-        if query_name in hmm_result:
+        if query_name in raw_hmm_result:
             continue
 
         else:
-            hmm_result[query_name] = [target_name, evalue]
+            raw_hmm_result[query_name].append([target_name, float(evalue)])
+
+    #Get the lower evalue
+
+    hmm_result = defaultdict(tuple)
+
+    for query in raw_hmm_result:
+        hmm_result[query] = sorted(raw_hmm_result[query], key=lambda x: x[1])[0]
 
     return hmm_result
 
