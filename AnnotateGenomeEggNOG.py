@@ -119,18 +119,13 @@ def parse_hmm_results(input_file):
 
         query_name = line.split()[0]
         target_name = line.split()[2]
-        evalue = line.split()[4]
+        evalue = float(line.split()[4])
 
-        if query_name in raw_hmm_result:
-            continue
+        raw_hmm_result[query_name].append([target_name, evalue])
 
-        else:
-            raw_hmm_result[query_name].append([target_name, float(evalue)])
-
-    #Get the lower evalue
+    # Get the lower evalue
 
     hmm_result = defaultdict(tuple)
-
     for query in raw_hmm_result:
         hmm_result[query] = sorted(raw_hmm_result[query], key=lambda x: x[1])[0]
 
