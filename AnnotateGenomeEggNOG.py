@@ -154,7 +154,7 @@ def main():
     # Run the hmmsearch
     tab_out = args.output_prefix + "_hmmsearch.txt"
     run_out = args.output_prefix + 'run_out.txt'
-    #run_hmmsearch(args.input_fasta, args.eggnog_db, args.cpus, tab_out, run_out)
+    run_hmmsearch(args.input_fasta, args.eggnog_db, args.cpus, tab_out, run_out)
 
     # Parse results
     hmm_results = parse_hmm_results(tab_out)
