@@ -93,7 +93,7 @@ def run_hmmsearch(input_fasta, db, num_cpus, tab_output, run_output):
     import sys
 
     try:
-        subprocess.call(["hmmsearch", "-E", "0.001", "--cpu", str(num_cpus), "--tblout", tab_output, "-o", run_output,
+        subprocess.call(["hmmsearch", "-E", "0.001", "--cpu", str(num_cpus), "--tblout", tab_output, "--noali",
                         db, input_fasta])
     except OSError as e:
         if e.errno == os.errno.ENOENT:
